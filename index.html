@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Love Multi Page</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4, #f472b6);
+    background-size: 300% 300%;
+    animation: bgmove 10s ease-in-out infinite;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+
+  @keyframes bgmove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .content-box {
+    display: none;
+    max-width: 850px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+  }
+
+  #mainText {
+    font-size: 2.7rem;
+    cursor: pointer;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+  }
+
+  #mainText:hover { transform: scale(1.05); }
+
+  .btn {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: white;
+    color: black;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #e5e5e5;
+  }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" src="https://raw.githubusercontent.com/FahimAhammedSagor/Blue-song/main/videoplayback.mp3"></audio>
+
+<h1 id="mainText">Surprise is Getting Ready…💙</h1>
+<div id="lockMsg">Loading…</div>
+<div class="small">Please wait 🕒</div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="content-box">
+  <p>আজ ঠিক ৯ মাস আগে তোমার সঙ্গে আমার কথা শুরু হয়েছিল।</p>
+  <p>তোমাকে প্রথম কলেজে দেখেই আমার মনে হয়েছিল— আমি তোমার সাথে  সম্পর্ক হবে  </p>
+  <button class="btn" onclick="showPage(2)">Next →</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="content-box">
+  <p>সেটাই ছিল আমার হৃদয়ের  সত্যি অনুভূতি।।</p>
+  <p>আল্লাহ আমার সেই মনের কথা শুনেছেন বলেই ,তোমাকে আমার জীবনে পাঠিয়েছেন।</p>
+  <button class="btn" onclick="showPage(3)">Next →</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="content-box">
+  <p>এই ৯ মাস কিভাবে চলে গেল— হাসি, রাগ, অভিমান, কেয়ার আর ভালোবাসা ।…</p>
+  <p>সব মিলিয়ে যেন আমরা একটা সুন্দর গল্পের দুই চরিত্র।</p>
+  <button class="btn" onclick="showPage(4)">Next →</button>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="content-box">
+  <p>তুমি আমার কাছে এমন মনে হও যেন ছোটবেলা থেকেই আমরা পরিচিত।</p>
+  <p>তোমাকে আমি কখনোই হারাতে চাই না। </p>
+  <p>ইনশাল্লাহ আমি তোমাকে কখনোই হারাবো না </p>
+  <button class="btn" onclick="showPage(5)">Next →</button>
+</div>
+
+<!-- PAGE 5 -->
+<div id="page5" class="content-box">
+  <p>ইনশাল্লাহ , সারাজীবন তুমি আমাকে খুব কাছেই পাবে।</p>
+  <p> আপনার জন্য সবসময় ভালোবাসা ও দোয়া   ।</p>
+  <button class="btn" onclick="showPage(6)">Next →</button>
+</div>
+
+<!-- PAGE 6 -->
+<div id="page6" class="content-box">
+  <p>আজকে আমি বেশি কিছু বললাম না…</p>
+  <p>কারণ সামনে তোমার জন্য আছে একটা বড় সারপ্রাইজ!</p>
+  <h3>Just wait… 🪐🫀🦋🌙🎀💙💫✨</h3>
+</div>
+
+<script>
+const unlockTime = new Date();
+unlockTime.setHours(21, 33, 0, 0); // 9:33 PM
+
+const lockMsg = document.getElementById("lockMsg");
+const mainText = document.getElementById("mainText");
+const bgMusic = document.getElementById("bgMusic");
+
+function checkLock() {
+  const now = new Date();
+  const diff = unlockTime - now;
+
+  if (diff <= 0) {
+    lockMsg.textContent = "✨ Ready ✨";
+    return true;
+  }
+
+  const hrs = Math.floor(diff / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  lockMsg.textContent = `Opens in ${hrs}h ${mins}m ${secs}s`;
+  return false;
+}
+
+setInterval(checkLock, 1000);
+checkLock();
+
+mainText.addEventListener("click", () => {
+  if (checkLock()) {
+    mainText.style.display = "none";
+    lockMsg.style.display = "none";
+    document.querySelector('.small').style.display = "none";
+    document.getElementById("page1").style.display = "block";
+    bgMusic.play();
+  }
+});
+
+function showPage(num) {
+  for (let i = 1; i <= 6; i++) {
+    document.getElementById(`page${i}`).style.display = "none";
+  }
+  document.getElementById(`page${num}`).style.display = "block";
+}
+</script>
+
+</body>
+</html>
